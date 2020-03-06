@@ -71,7 +71,6 @@ public class Player_Controller : MonoBehaviour
         if (m_rotationHelper != null)
         {
             m_rotationHelper.transform.Rotate(new Vector3((-m_inputHandler.GetVerticalLookInput()), 0f, 0f), Space.Self);
-            transform.Rotate(new Vector3((-m_inputHandler.GetVerticalLookInput()), 0f, 0f), Space.Self);
         }
 
         //Check if player is sprinting. 
