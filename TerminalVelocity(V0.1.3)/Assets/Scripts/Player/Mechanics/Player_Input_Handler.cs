@@ -121,7 +121,7 @@ public class Player_Input_Handler : MonoBehaviour
     {    
         if (CanInput())
         {
-            return Input.GetButton(GameConstants.BUTTON_SPRINT);
+            return Input.GetButtonDown(GameConstants.BUTTON_SPRINT);
         }
 
         return false;
@@ -132,7 +132,7 @@ public class Player_Input_Handler : MonoBehaviour
     {
         if (CanInput())
         {
-            return Input.GetButtonDown(GameConstants.BUTTON_JUMP);
+            return Input.GetButton(GameConstants.BUTTON_JUMP);
         }
 
         return false;
@@ -143,7 +143,7 @@ public class Player_Input_Handler : MonoBehaviour
     {
         if (CanInput())
         {
-            return Input.GetButton(GameConstants.BUTTON_JUMP);
+            return Input.GetButtonDown(GameConstants.BUTTON_JUMP);
         }
 
         return false;

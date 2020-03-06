@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3246501058108755959}
   - component: {fileID: 1698017902575920839}
   - component: {fileID: 6291685417031461634}
+  - component: {fileID: -8107268282614686485}
   m_Layer: 0
   m_Name: PhotonPlayer
   m_TagString: Untagged
@@ -70,7 +71,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_inputHandler: {fileID: 3246501058108755959}
-  m_rotationHelper: {fileID: 0}
   m_walkSpeed: 4
   m_sprintSpeed: 10
   m_acceleration: 4
@@ -79,22 +79,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.0011787415
-      value: 1.0017242
-      inSlope: 0
-      outSlope: 0
+      time: 0.0030441284
+      value: 1.001709
+      inSlope: 4.6082115
+      outSlope: 4.6082115
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.03669943
     - serializedVersion: 3
-      time: 0.69421387
-      value: -0.005126953
-      inSlope: 0
-      outSlope: 0
+      time: 0.70071554
+      value: -0.4998181
+      inSlope: 0.15224689
+      outSlope: 0.15224689
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.04965643
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -143,8 +143,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAvatarPrefab: {fileID: 6598361305286481971, guid: a343ed31bc6c5244498a8f990d15efbf,
     type: 3}
-  playerController: {fileID: 1941035915093852739}
-  inputHandler: {fileID: 3246501058108755959}
-  playerCamera: {fileID: 0}
-  UI: {fileID: 0}
-  playerBody: {fileID: 0}
+--- !u!143 &-8107268282614686485
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305261771827534002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.76
+  m_Radius: 0.41
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.0001
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: -0.26, z: 0}

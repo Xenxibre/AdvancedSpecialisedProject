@@ -15,8 +15,8 @@ public class Player_Controller : MonoBehaviour
     //Input Manager. 
     [SerializeField] private Player_Input_Handler m_inputHandler;
 
+    private GameObject m_rotationHelper;
     private CharacterController m_characterController;
-    [SerializeField] private GameObject m_rotationHelper;
 
     //Movement variables.
     private float m_moveSpeed;
@@ -43,7 +43,8 @@ public class Player_Controller : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        m_characterController = GetComponent<CharacterController>(); 
 
         m_primaryChanged = false;
         m_secondaryChanged = false;
@@ -60,6 +61,8 @@ public class Player_Controller : MonoBehaviour
         {
             SwitchWeapon(); 
         }
+
+        Debug.Log("The player is on the ground: " + m_characterController.isGrounded);
     }
 
     void HandleCharacterMovement()
@@ -105,7 +108,7 @@ public class Player_Controller : MonoBehaviour
 
     void JumpInput()
     {
-        if (m_inputHandler.GetJumpInputDown() && !m_isJumping)
+        if (m_inputHandler.GetJumpInputHeld() && !m_isJumping)
         {
             m_isJumping = true;
             StartCoroutine(JumpEvent());
@@ -149,8 +152,8 @@ public class Player_Controller : MonoBehaviour
 
     private IEnumerator JumpEvent()
     {
-        m_characterController.slopeLimit = 90.0f;
         float timeInAir = 0;
+
         do
         {
             float jumpForce = m_jumpFalloff.Evaluate(timeInAir);
@@ -159,12 +162,10 @@ public class Player_Controller : MonoBehaviour
             yield return null;
         } while (m_characterController.isGrounded && m_characterController.collisionFlags != CollisionFlags.Above);
         m_isJumping = false; 
-        m_characterController.slopeLimit = 45.0f;
     }
 
     public void SetupForMovement()
     {
-        m_characterController = GetComponentInChildren<CharacterController>();
         m_rotationHelper = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/RotationHelper").gameObject;
     }
 }

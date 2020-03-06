@@ -6,25 +6,26 @@ using UnityEngine;
 
 public class Player_Networking : MonoBehaviour
 {
-    private PhotonView PV;
-    private Player_Controller PC; 
-
     [SerializeField] private GameObject playerAvatarPrefab;
 
-    [SerializeField] private Player_Controller playerController;
-    [SerializeField] private Player_Input_Handler inputHandler;
-    [SerializeField] private GameObject playerCamera;
-    [SerializeField] private GameObject UI;
-    [SerializeField] private GameObject playerBody;
+    private PhotonView PV;
+
+    private Player_Controller playerController; 
+    private Player_Input_Handler inputHandler;
+
+    private GameObject playerCamera;
+    private GameObject UI;
+    private GameObject playerBody;
 
     void Start()                                                                        
     {   
         PV = GetComponent<PhotonView>();
-        PC = GetComponent<Player_Controller>();
+        playerController = GetComponent<Player_Controller>();
+        inputHandler = GetComponent<Player_Input_Handler>(); 
 
         SpawnAvatar();
 
-        PC.SetupForMovement();
+        playerController.SetupForMovement();
 
         UI = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI").gameObject;
 

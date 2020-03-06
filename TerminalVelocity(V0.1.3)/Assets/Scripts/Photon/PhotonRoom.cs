@@ -173,6 +173,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         Debug.Log("[INFO] Network player created.");
         int spawnPicker = Random.Range(0, Game_Spawns.GS.spawnPoints.Length);
         Vector3 spawnPos = Game_Spawns.GS.spawnPoints[spawnPicker].position;
+        Destroy(Game_Spawns.GS.spawnPoints[spawnPicker].gameObject);
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayer"), spawnPos, Quaternion.identity, 0);
     }
 
