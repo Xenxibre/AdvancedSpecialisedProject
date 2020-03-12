@@ -10,14 +10,17 @@ GameObject:
   m_Component:
   - component: {fileID: 873136496537917480}
   - component: {fileID: 3594531671704230824}
+  - component: {fileID: 4872254053067896681}
   - component: {fileID: 1941035915093852739}
   - component: {fileID: 3246501058108755959}
   - component: {fileID: 1698017902575920839}
   - component: {fileID: 6291685417031461634}
+  - component: {fileID: 6129215704394476790}
+  - component: {fileID: 1991254104409631925}
   - component: {fileID: -8107268282614686485}
   m_Layer: 0
   m_Name: PhotonPlayer
-  m_TagString: Untagged
+  m_TagString: PlayerAlive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,6 +61,18 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4872254053067896681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305261771827534002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908c7d290773b9478808e0266f14605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1941035915093852739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5354bf188a4237e4dbddff917b7447a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_lookSensitivity: 100
+  m_lookSensitivity: 200
 --- !u!114 &1698017902575920839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
 --- !u!114 &6291685417031461634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +158,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAvatarPrefab: {fileID: 6598361305286481971, guid: a343ed31bc6c5244498a8f990d15efbf,
     type: 3}
+--- !u!114 &6129215704394476790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305261771827534002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d618f652adadd43a4b6bbff7c6dacc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_categoryPanels: []
+--- !u!114 &1991254104409631925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305261771827534002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1474df7bd44d98245b860ed50567041f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gunController: {fileID: 0}
+  activeGun: {fileID: 0}
+  gunInfo: {fileID: 0}
+  primary: 0
+  secondary: 0
+  equipped: 0
 --- !u!143 &-8107268282614686485
 CharacterController:
   m_ObjectHideFlags: 0

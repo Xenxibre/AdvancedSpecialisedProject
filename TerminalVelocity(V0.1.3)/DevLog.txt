@@ -108,4 +108,23 @@ two different players, and their positions are synced across the network.
 5/3/2020
 Working on FMP proposal. 
 
+6/3/2020
+Moved weapon input and control to the networked player object so the weapons position and animations
+can later be synced across the network. Designed new weapon equipping system with weapon manager parent object 
+that holds a list of all weapons and a function to return one at a passed in index. This is then managed by the 
+networked player object which gets the one it needs and all of the relevant info.
+
 7/3/2020 - Work (12:00 - 21:00)
+
+8/3/2020
+Continued working on and debugging weapon management system. Created InventoryUI script to manage game
+assets displaying UI elements. Tab brings up shop menu which has a list of weapon categories. Clicking on a category 
+changes the stock panel to display all guns available for purchase with their price and a button to confirm the 
+transaction if you are a high enough level and have enough money.
+
+9/3/2020 - Work(16:00 - 00:30)
+
+10/3/2020
+Created UI artwork and downloaded fonts and redesigned lobby and menu UIs as well as the inventory UI. 
+
+11/3/2020 - Work (9:00 - 17:00)

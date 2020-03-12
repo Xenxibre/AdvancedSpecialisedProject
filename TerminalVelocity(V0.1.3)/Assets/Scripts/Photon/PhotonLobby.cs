@@ -172,6 +172,11 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, ILobbyCallbacks
         lobbyPanel.SetActive(false);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit(); 
+    }
+
     //Predicate function for searching for a room by name.
     static System.Predicate<RoomInfo> ByName(string name)
     {

@@ -12,6 +12,7 @@ public class Player_Networking : MonoBehaviour
 
     private Player_Controller playerController; 
     private Player_Input_Handler inputHandler;
+    private GunManager gunManager; 
 
     private GameObject playerCamera;
     private GameObject UI;
@@ -21,11 +22,14 @@ public class Player_Networking : MonoBehaviour
     {   
         PV = GetComponent<PhotonView>();
         playerController = GetComponent<Player_Controller>();
-        inputHandler = GetComponent<Player_Input_Handler>(); 
+        inputHandler = GetComponent<Player_Input_Handler>();
+        gunManager = GetComponent<GunManager>(); 
 
         SpawnAvatar();
 
         playerController.SetupForMovement();
+
+        gunManager.SetupForShooting(); 
 
         UI = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI").gameObject;
 

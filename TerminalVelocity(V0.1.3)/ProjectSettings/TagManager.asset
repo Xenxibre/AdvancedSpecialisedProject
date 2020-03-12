@@ -10,6 +10,9 @@ TagManager:
   - RotationHelper
   - UI
   - Body
+  - PlayerAlive
+  - PlayerDead
+  - ZombieManager
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 

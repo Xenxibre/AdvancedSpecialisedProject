@@ -56,13 +56,6 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         HandleCharacterMovement(); 
-
-        if(m_inputHandler.GetSwitchWeapon() && !m_inputHandler.GetRightMousePressed())
-        {
-            SwitchWeapon(); 
-        }
-
-        Debug.Log("The player is on the ground: " + m_characterController.isGrounded);
     }
 
     void HandleCharacterMovement()
@@ -132,22 +125,6 @@ public class Player_Controller : MonoBehaviour
             }
         }
         return false;
-    }
-
-    private void SwitchWeapon()
-    {
-        if (m_currentlyEquipped == 0)
-        {
-            m_currentlyEquipped = 1;
-            m_equippedGunList[0].SetActive(false);
-            m_equippedGunList[1].SetActive(true);
-        }
-        else
-        {
-            m_currentlyEquipped = 0;
-            m_equippedGunList[0].SetActive(true);
-            m_equippedGunList[1].SetActive(false);
-        }
     }
 
     private IEnumerator JumpEvent()

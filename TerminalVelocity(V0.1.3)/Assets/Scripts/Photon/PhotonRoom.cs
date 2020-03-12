@@ -73,7 +73,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         roomPanel.SetActive(true); //Activate room UI.
         lobbyPanel.SetActive(false); //Disable lobby UI.
 
-        roomName.text = PhotonNetwork.CurrentRoom.Name; //Update room name text.
+        roomName.text = "  " + PhotonNetwork.CurrentRoom.Name; //Update room name text.
 
         if (PhotonNetwork.IsMasterClient) //Allow host to start the game.
         {
