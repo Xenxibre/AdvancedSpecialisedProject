@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZombieManager : MonoBehaviour
 {
     [SerializeField] private List<Player_Stats> activePlayers;
-    private List<Transform> alivePlayers; 
+    [SerializeField] private List<Transform> alivePlayers; 
 
     void Start()
     {

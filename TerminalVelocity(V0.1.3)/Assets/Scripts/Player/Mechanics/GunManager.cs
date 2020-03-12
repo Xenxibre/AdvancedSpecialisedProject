@@ -23,19 +23,23 @@ public class GunManager : MonoBehaviour
     private bool m_canFire;
     private bool m_canAim;
 
-    private int m_bulletsRemaining;
+    private int m_bulletsLeftInClip;
 
     //Avatar Components.
     private GameObject m_rotationHelper; 
 
     //UI Elements.
     private Text m_ammoCount;
+    private Text m_gunName; 
     private GameObject m_crosshair;
 
     private void Start()
     {
         m_inputHandler = GetComponent<Player_Input_Handler>();
         m_crosshair = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI/Canvas/InGame/Crosshair").gameObject;
+        m_gunName = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI/Canvas/InGame/GunName").GetComponent<Text>();
+        m_ammoCount = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI/Canvas/InGame/AmmoCounter").GetComponent<Text>(); 
+
 
         primary = 0;
         secondary = 1;
@@ -49,7 +53,7 @@ public class GunManager : MonoBehaviour
     {
         UpdateUI();
 
-        if (m_bulletsRemaining > 0)
+        if (m_bulletsLeftInClip > 0)
         {
             Fire();
         }
@@ -66,7 +70,8 @@ public class GunManager : MonoBehaviour
         m_gunController = GetComponentInChildren<Gun_Controller>();
 
         activeGun = m_gunController.GetGunObject(primary);
-        gunInfo = activeGun.GetComponent<Gun>(); 
+        gunInfo = activeGun.GetComponent<Gun>();
+        m_bulletsLeftInClip = gunInfo.ClipSize; 
 
         m_rotationHelper = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/RotationHelper").gameObject;
         gunInfo.Components.SetActive(true); 
@@ -88,6 +93,7 @@ public class GunManager : MonoBehaviour
             gunInfo.Components.SetActive(false); //Disable components of currently equipped gun.
             activeGun = m_gunController.GetGunObject(secondary); //Set active gun to secondary gun.
             gunInfo = activeGun.GetComponent<Gun>(); //Get the gun info.
+            m_bulletsLeftInClip = gunInfo.ClipSize;
             gunInfo.Components.SetActive(true); //Activate the components of the newly equipped gun.
         }
         else if(equipped == 2)
@@ -96,6 +102,7 @@ public class GunManager : MonoBehaviour
             gunInfo.Components.SetActive(false);
             activeGun = m_gunController.GetGunObject(primary);
             gunInfo = activeGun.GetComponent<Gun>();
+            m_bulletsLeftInClip = gunInfo.ClipSize;
             gunInfo.Components.SetActive(true);
         }
     }
@@ -138,12 +145,10 @@ public class GunManager : MonoBehaviour
         {
             if (m_canFire)
             {
-                gunInfo.MuzzleFlash.Play();
-
                 m_rotationHelper.transform.Rotate(new Vector3(gunInfo.YKickBase, 0, 0), Space.Self); //Vertical recoil.
                 transform.Rotate(new Vector3(0, gunInfo.XKickBase, 0), Space.Self); //Horizontal recoil.
 
-                m_bulletsRemaining--; //Reduce number of bullets remaining.
+                m_bulletsLeftInClip--; //Reduce number of bullets remaining.
 
                 StartCoroutine(WaitForShot()); //Delay next shot.
             }
@@ -153,21 +158,31 @@ public class GunManager : MonoBehaviour
     //If the player has fired any bullets begin reloading.
     private void StartReload()
     {
-        if (m_bulletsRemaining < gunInfo.ClipSize && m_inputHandler.GetReloadPressed())
+        if (m_bulletsLeftInClip < gunInfo.ClipSize && gunInfo.AmmoRemaining > 0 && m_inputHandler.GetReloadPressed())
         {
-            StartCoroutine(WaitForReload()); //Delay reload.
+            if(gunInfo.AmmoRemaining > (gunInfo.ClipSize - m_bulletsLeftInClip))
+            {
+                gunInfo.AmmoRemaining -= gunInfo.ClipSize - m_bulletsLeftInClip;
+                m_bulletsLeftInClip = gunInfo.ClipSize; //Replenish bullets.
+                StartCoroutine(WaitForReload()); 
+            }
+            else if(gunInfo.AmmoRemaining < (gunInfo.ClipSize - m_bulletsLeftInClip)) 
+            {
+                m_bulletsLeftInClip = gunInfo.AmmoRemaining + m_bulletsLeftInClip;
+                gunInfo.AmmoRemaining = 0; 
+            }         
         }
     }
 
     private void FinishReload()
     {
-        m_bulletsRemaining = gunInfo.ClipSize; //Replenish bullets.
         m_canFire = true; //Allow the player to shoot again.
     }
 
     private void UpdateUI()
     {
-        //m_ammoCount.text = m_bulletsRemaining + "/" + gunInfo.ClipSize;
+        m_ammoCount.text = m_bulletsLeftInClip + "/" + gunInfo.AmmoRemaining;
+        m_gunName.text = gunInfo.Name; 
     }
 
     private IEnumerator WaitForReload()

@@ -23,11 +23,15 @@ the version I was using did not have support for Photon PUN, my plugin of choice
 from game to Photon servers.
 
 22/1/2020
-Created 'battle button' style matchmaking with one-click connect functionality. 
+Created 'battle button' style matchmaking with one-click connect functionality. Learnt the basics of how to
+use the photon plugin so I can develop my own matchmaking system as one-click is not great for the game I 
+want to make. 
 
 24/1/2020
-Implemented 'server browser' style matchmaking with room creation and host migration. 
-<Slightly Buggy>.
+Implemented 'server browser' style matchmaking with room creation and host migration. Player types in their 
+chosen username before connecting to the photon master servers and seeing an available list of rooms which 
+can be joined and the option to create a room of their own. Player that creates the room has a start button
+available to them which can be clicked whenever all players are ready. 
 
 25/1/2020 - Work (8:30 - 17:00)
 Fixed issue with matchmaking UI that was causing all elements 
@@ -125,6 +129,14 @@ transaction if you are a high enough level and have enough money.
 9/3/2020 - Work(16:00 - 00:30)
 
 10/3/2020
-Created UI artwork and downloaded fonts and redesigned lobby and menu UIs as well as the inventory UI. 
+Created UI artwork and downloaded fonts and redesigned lobby and menu UIs as well as the inventory UI and in game UI
+such as crosshairs and health bar.  
 
 11/3/2020 - Work (9:00 - 17:00)
+Designed networking components of basic zombie type as well as the manager object. Used navmesh component
+to give zombie ability to navigate to a certain spot while avoiding obstacles. Also created algorithm
+which calculates which player is closest to the zombie and chooses that one to chase. 
+
+12/3/2020 
+Synced zombies positions across the network, added zombie model to zombie model prefab. 
+

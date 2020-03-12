@@ -13,9 +13,11 @@ public class Player_Stats : MonoBehaviour
 
     private void Start()
     {
+        isAlive = true;
+
         Position = GetComponent<Transform>(); 
         zombManager = GameObject.FindGameObjectWithTag("ZombieManager").GetComponent<ZombieManager>();
-        zombManager.AddToPlayerList(this); 
+        zombManager.AddToPlayerList(this);     
     }
 
     public void TakeDamage(float amount)

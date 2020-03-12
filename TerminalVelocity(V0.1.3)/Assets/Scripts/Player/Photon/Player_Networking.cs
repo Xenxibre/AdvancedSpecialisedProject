@@ -39,8 +39,6 @@ public class Player_Networking : MonoBehaviour
 
         if (!PV.IsMine)
         {
-            bool yo = PV.IsMine;
-            Debug.Log("PV is mine: " + yo); 
             playerController.enabled = false;
             inputHandler.enabled = false;           
         }

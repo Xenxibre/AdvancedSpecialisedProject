@@ -30,6 +30,7 @@ public class ZombieController : MonoBehaviour
         {
             UpdateClosestPlayer();
         }        
+
         MoveTowards(); 
     }
 

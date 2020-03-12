@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private string m_name; //Name of the weapon.
 
+    [SerializeField] private int m_ammoRemaining; //Total number of bullets remaining. 
     [SerializeField] private int m_clipSize; //The maximum ammo capacity of the guns magazines.
     [SerializeField] private int m_fireType; //Whether the gun is single shot, semi, or fully automatic. 
     [SerializeField] private int m_weight; //How it affects movement speed.
@@ -45,4 +46,5 @@ public class Gun : MonoBehaviour
     public float ShotDelay { get => m_shotDelay; set => m_shotDelay = value; }
     public GameObject GFX { get => m_GFX; set => m_GFX = value; }
     public GameObject Components { get => m_components; set => m_components = value; }
+    public int AmmoRemaining { get => m_ammoRemaining; set => m_ammoRemaining = value; }
 }
