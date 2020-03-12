@@ -61,7 +61,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10664}
     - Class: 114
+<<<<<<< HEAD
       Script: {instanceID: 11556}
+=======
+      Script: {instanceID: 11558}
+>>>>>>> master
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -138,11 +142,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11182}
     - Class: 114
+<<<<<<< HEAD
       Script: {instanceID: 11492}
     - Class: 114
       Script: {instanceID: 11556}
     - Class: 114
       Script: {instanceID: 16272}
+=======
+      Script: {instanceID: 11494}
+    - Class: 114
+      Script: {instanceID: 11558}
+    - Class: 114
+      Script: {instanceID: 14086}
+>>>>>>> master
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -860,5 +872,10 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/LobbyMenu.unity
   - Assets/Scenes/GameLevel.unity
+<<<<<<< HEAD
   playerPath: C:/Users/jaket/OneDrive/Desktop/AdvancedSpecialisedProject/Terminal
     Velocity - Build/Terminal Velocity.exe
+=======
+  playerPath: C:/Users/jaket/Desktop/AdvancedSpecialisedProject/TerminalVelocity -
+    Build/Terminal Velocity.exe
+>>>>>>> master
