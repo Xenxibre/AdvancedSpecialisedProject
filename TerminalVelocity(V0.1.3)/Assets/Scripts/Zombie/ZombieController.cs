@@ -9,7 +9,10 @@ public class ZombieController : MonoBehaviour
     private ZombieManager zombManager;
 
     //Own agent. 
-    private NavMeshAgent agent; 
+    private NavMeshAgent agent;
+
+    //Zombie Info. 
+    private float health; 
 
     //Positions of players that are alive. 
     private List<Transform> playerList;
@@ -17,11 +20,15 @@ public class ZombieController : MonoBehaviour
     //Position of the closest player. 
     private Vector3 closestPlayer;
 
+   
+
     private void Start()
     {        
         zombManager = GameObject.Find("ZombieManager").GetComponent<ZombieManager>();
         agent = GetComponent<NavMeshAgent>();
         playerList = zombManager.GetPlayerPosList();
+
+        health = 100; 
     }
 
     private void Update()
@@ -32,6 +39,11 @@ public class ZombieController : MonoBehaviour
         }        
 
         MoveTowards(); 
+
+        if(health <= 0)
+        {
+            Destroy(this.gameObject); 
+        }
     }
 
     //Search through the player list and calculate the closest.
@@ -70,4 +82,7 @@ public class ZombieController : MonoBehaviour
     {
         agent.SetDestination(closestPlayer); 
     }
+
+    //Getters & Setters.
+    public float Health { get => health; set => health = value; }
 }

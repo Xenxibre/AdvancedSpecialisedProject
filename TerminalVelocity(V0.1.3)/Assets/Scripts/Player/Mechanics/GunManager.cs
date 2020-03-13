@@ -32,14 +32,17 @@ public class GunManager : MonoBehaviour
     private Text m_ammoCount;
     private Text m_gunName; 
     private GameObject m_crosshair;
+    [SerializeField] private Camera m_camera; 
+    private Vector3 m_centreOfScreen; 
 
     private void Start()
     {
         m_inputHandler = GetComponent<Player_Input_Handler>();
+        m_camera = GetComponentInChildren<Camera>(); 
         m_crosshair = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI/Canvas/InGame/Crosshair").gameObject;
         m_gunName = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI/Canvas/InGame/GunName").GetComponent<Text>();
-        m_ammoCount = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI/Canvas/InGame/AmmoCounter").GetComponent<Text>(); 
-
+        m_ammoCount = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI/Canvas/InGame/AmmoCounter").GetComponent<Text>();
+        m_centreOfScreen = new Vector3(0.5f, 0.5f, 0); 
 
         primary = 0;
         secondary = 1;
@@ -145,6 +148,20 @@ public class GunManager : MonoBehaviour
         {
             if (m_canFire)
             {
+                gunInfo.MuzzleFlash.Play();
+
+                Ray ray = m_camera.ViewportPointToRay(m_centreOfScreen);
+                RaycastHit hit; 
+
+                if(Physics.Raycast(ray, out hit))
+                {
+                    if(hit.transform.gameObject.tag == "Monster")
+                    {
+                        Debug.Log("[INFO] Nailed one of the bastards.");
+                        hit.transform.gameObject.GetComponent<ZombieController>().Health -= gunInfo.Base_damage; 
+                    }
+                }
+
                 m_rotationHelper.transform.Rotate(new Vector3(gunInfo.YKickBase, 0, 0), Space.Self); //Vertical recoil.
                 transform.Rotate(new Vector3(0, gunInfo.XKickBase, 0), Space.Self); //Horizontal recoil.
 

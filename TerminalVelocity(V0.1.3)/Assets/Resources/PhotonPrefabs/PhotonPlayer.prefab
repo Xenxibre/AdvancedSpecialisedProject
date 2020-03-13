@@ -190,6 +190,7 @@ MonoBehaviour:
   primary: 0
   secondary: 0
   equipped: 0
+  m_camera: {fileID: 0}
 --- !u!143 &-8107268282614686485
 CharacterController:
   m_ObjectHideFlags: 0

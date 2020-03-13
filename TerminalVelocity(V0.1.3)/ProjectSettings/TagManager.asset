@@ -13,6 +13,7 @@ TagManager:
   - PlayerAlive
   - PlayerDead
   - ZombieManager
+  - Monster
   layers:
   - Default
   - TransparentFX
