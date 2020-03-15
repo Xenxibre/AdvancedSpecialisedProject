@@ -14,7 +14,6 @@ ScriptsOnlyBuild:
     - Player_Networking
     - Player_Stats
     - RoomButton
-    - UnityEngine.AI.NavMeshModifier
     - UnityEngine.AI.NavMeshSurface
     - ZombieController
     - ZombieManager
@@ -56,6 +55,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 64
+      Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
     - Class: 89
@@ -70,8 +71,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10012}
     - Class: 114
       Script: {instanceID: 10342}
-    - Class: 114
-      Script: {instanceID: 10600}
     - Class: 114
       Script: {instanceID: 10636}
     - Class: 114
@@ -176,7 +175,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11646}
     - Class: 114
-      Script: {instanceID: 45852}
+      Script: {instanceID: 68996}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -736,7 +735,7 @@ ScriptsOnlyBuild:
     className: PunTurnManager
   - hash:
       serializedVersion: 2
-      Hash: b1d66373076f6fdfe5dc5ae32afc7367
+      Hash: 8595ae9e449cd1771fedc8ca3859e257
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GunManager
