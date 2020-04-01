@@ -28,6 +28,10 @@ public class Player_Input_Handler : MonoBehaviour
         return false;
     }
 
+    //-------------------------------------------------------------
+    //Mouse Controls. 
+    //-------------------------------------------------------------
+
     public bool GetLeftMouseHeld()
     {
         if (CanInput())
@@ -76,6 +80,22 @@ public class Player_Input_Handler : MonoBehaviour
         return false;
     }
 
+    //---------------------------------------------------------------
+    //Keyboard Buttons. 
+    //---------------------------------------------------------------
+    public bool GetInteractPressed()
+    {
+        if(CanInput())
+        {
+            if(Input.GetButtonDown(GameConstants.BUTTON_INTERACT))
+            {
+                Debug.Log("[INFO] Interact button pressed.");
+                return true; 
+            }
+        }
+        return false; 
+    }
+
     public bool GetReloadPressed()
     {
         if(CanInput())
@@ -121,7 +141,7 @@ public class Player_Input_Handler : MonoBehaviour
     {    
         if (CanInput())
         {
-            return Input.GetButtonDown(GameConstants.BUTTON_SPRINT);
+            return Input.GetButton(GameConstants.BUTTON_SPRINT);
         }
 
         return false;
@@ -132,7 +152,7 @@ public class Player_Input_Handler : MonoBehaviour
     {
         if (CanInput())
         {
-            return Input.GetButton(GameConstants.BUTTON_JUMP);
+            return Input.GetButtonDown(GameConstants.BUTTON_JUMP);
         }
 
         return false;
@@ -143,7 +163,7 @@ public class Player_Input_Handler : MonoBehaviour
     {
         if (CanInput())
         {
-            return Input.GetButtonDown(GameConstants.BUTTON_JUMP);
+            return Input.GetButton(GameConstants.BUTTON_JUMP);
         }
 
         return false;

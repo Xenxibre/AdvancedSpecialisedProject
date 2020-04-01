@@ -16,4 +16,5 @@
     public const string BUTTON_RELOAD           = "Reload";
     public const string BUTTON_SWITCH_WEAPON    = "SwitchWeapon";
     public const string BUTTON_INVENTORY        = "Inventory";
+    public const string BUTTON_INTERACT         = "Interact"; 
 }

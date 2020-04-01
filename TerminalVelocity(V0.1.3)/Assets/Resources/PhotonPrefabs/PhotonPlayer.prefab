@@ -73,6 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6908c7d290773b9478808e0266f14605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayDistance: 2
+  buyTextObject: {fileID: 0}
   zombManager: {fileID: 0}
 --- !u!114 &1941035915093852739
 MonoBehaviour:
@@ -86,37 +88,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 209f5158abe4f7047b61ee089047fffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_inputHandler: {fileID: 3246501058108755959}
-  m_walkSpeed: 4
-  m_sprintSpeed: 10
-  m_acceleration: 4
-  m_jumpMultiplier: 10
-  m_jumpFalloff:
+  jumpForce: 6
+  groundMask:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0030441284
-      value: 1.001709
-      inSlope: 4.6082115
-      outSlope: 4.6082115
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.03669943
-    - serializedVersion: 3
-      time: 0.70071554
-      value: -0.4998181
-      inSlope: 0.15224689
-      outSlope: 0.15224689
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.04965643
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_gunList: []
-  m_equippedGunList: []
+    m_Bits: 8192
+  walkSpeed: 4
+  sprintSpeed: 8
+  acceleration: 2
 --- !u!114 &3246501058108755959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6fa0c12ce3e064096c1d349bec38ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAvatarPrefab: {fileID: 6598361305286481971, guid: a343ed31bc6c5244498a8f990d15efbf,
+  playerAvatarPrefab: {fileID: 469551070361113347, guid: 388e7481850a012429e032ca759cf943,
     type: 3}
 --- !u!114 &6129215704394476790
 MonoBehaviour:
@@ -171,7 +149,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d618f652adadd43a4b6bbff7c6dacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_categoryPanels: []
+  categoryPanels: []
+  gunImages:
+  - {fileID: 21300000, guid: b86508b764ffa5a4e94a3b068803bfe9, type: 3}
+  - {fileID: 21300000, guid: 76f2afaf4e81603419a46a5d822cc6f5, type: 3}
+  - {fileID: 21300000, guid: 8770ffabbf8dd5943aca21236977f359, type: 3}
+  - {fileID: 21300000, guid: 662860c1f258dee4596fd025771aa9bf, type: 3}
+  - {fileID: 21300000, guid: cb6a07ca60a175e42999a88f967f6043, type: 3}
+  - {fileID: 21300000, guid: a04d279cc88cdbf48b3d3b0eba1ec348, type: 3}
+  - {fileID: 21300000, guid: 2842828c8e26de2439c0d3d6dfef0ce9, type: 3}
 --- !u!114 &1991254104409631925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,11 +171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_gunController: {fileID: 0}
-  activeGun: {fileID: 0}
-  gunInfo: {fileID: 0}
-  primary: 0
-  secondary: 0
-  equipped: 0
   m_camera: {fileID: 0}
 --- !u!143 &-8107268282614686485
 CharacterController:

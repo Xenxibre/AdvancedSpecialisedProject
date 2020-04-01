@@ -1,7 +1,10 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - BuyGunButton
     - CategoriesPanel
+    - Door
+    - EquipGunButton
     - Game_Spawns
     - Gun
     - GunManager
@@ -14,6 +17,7 @@ ScriptsOnlyBuild:
     - Player_Networking
     - Player_Stats
     - RoomButton
+    - UITabButton
     - UnityEngine.AI.NavMeshSurface
     - ZombieController
     - ZombieManager
@@ -34,7 +38,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
-    - UnityEngine.UI.LayoutElement
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
@@ -55,6 +58,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
     - Class: 64
       Script: {instanceID: 0}
     - Class: 65
@@ -66,21 +71,23 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9756}
+      Script: {instanceID: 9758}
     - Class: 114
-      Script: {instanceID: 10012}
+      Script: {instanceID: 10014}
     - Class: 114
-      Script: {instanceID: 10342}
+      Script: {instanceID: 10346}
     - Class: 114
-      Script: {instanceID: 10636}
+      Script: {instanceID: 10640}
     - Class: 114
-      Script: {instanceID: 10710}
+      Script: {instanceID: 10714}
     - Class: 114
-      Script: {instanceID: 11458}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11580}
+      Script: {instanceID: 11586}
     - Class: 114
-      Script: {instanceID: 11646}
+      Script: {instanceID: 11652}
+    - Class: 114
+      Script: {instanceID: 20380}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 136
@@ -112,6 +119,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 84
@@ -127,55 +138,61 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9686}
     - Class: 114
-      Script: {instanceID: 9866}
+      Script: {instanceID: 9726}
     - Class: 114
-      Script: {instanceID: 9890}
+      Script: {instanceID: 9758}
     - Class: 114
-      Script: {instanceID: 9910}
+      Script: {instanceID: 9868}
     - Class: 114
-      Script: {instanceID: 10034}
+      Script: {instanceID: 9892}
     - Class: 114
-      Script: {instanceID: 10044}
+      Script: {instanceID: 9912}
     - Class: 114
-      Script: {instanceID: 10152}
+      Script: {instanceID: 10046}
     - Class: 114
-      Script: {instanceID: 10342}
+      Script: {instanceID: 10154}
     - Class: 114
-      Script: {instanceID: 10548}
+      Script: {instanceID: 10304}
     - Class: 114
-      Script: {instanceID: 10636}
+      Script: {instanceID: 10346}
     - Class: 114
-      Script: {instanceID: 10666}
+      Script: {instanceID: 10552}
     - Class: 114
-      Script: {instanceID: 10692}
+      Script: {instanceID: 10640}
     - Class: 114
-      Script: {instanceID: 10744}
+      Script: {instanceID: 10670}
     - Class: 114
-      Script: {instanceID: 10788}
+      Script: {instanceID: 10696}
     - Class: 114
-      Script: {instanceID: 10794}
+      Script: {instanceID: 10748}
     - Class: 114
-      Script: {instanceID: 10840}
+      Script: {instanceID: 10792}
     - Class: 114
-      Script: {instanceID: 10846}
+      Script: {instanceID: 10798}
     - Class: 114
-      Script: {instanceID: 10902}
+      Script: {instanceID: 10844}
     - Class: 114
-      Script: {instanceID: 10952}
+      Script: {instanceID: 10850}
     - Class: 114
-      Script: {instanceID: 10988}
+      Script: {instanceID: 10906}
     - Class: 114
-      Script: {instanceID: 11130}
+      Script: {instanceID: 10956}
     - Class: 114
-      Script: {instanceID: 11228}
+      Script: {instanceID: 10992}
     - Class: 114
-      Script: {instanceID: 11252}
+      Script: {instanceID: 11134}
     - Class: 114
-      Script: {instanceID: 11580}
+      Script: {instanceID: 11232}
     - Class: 114
-      Script: {instanceID: 11646}
+      Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 68996}
+      Script: {instanceID: 11462}
+    - Class: 114
+      Script: {instanceID: 11504}
+    - Class: 114
+      Script: {instanceID: 11586}
+    - Class: 114
+      Script: {instanceID: 11652}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -186,9 +203,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
+    - Class: 195
+      Script: {instanceID: 0}
     - Class: 198
       Script: {instanceID: 0}
     - Class: 199
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -223,6 +244,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SelectionCaret
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UITabButton
   - hash:
       serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
@@ -381,7 +408,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 12510431e3fe5af0fda4e5a003ae1089
+      Hash: 04be31088d052067ee70dd84eb2504ca
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player_Stats
@@ -469,6 +496,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: OnClickRpc
+  - hash:
+      serializedVersion: 2
+      Hash: d92c559b67eb57b0e26aa737b3d4f5fd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BuyGunButton
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -603,7 +636,7 @@ ScriptsOnlyBuild:
     className: OnClickDestroy
   - hash:
       serializedVersion: 2
-      Hash: f19e7656f1976fc8a3c4bf038f71ec2a
+      Hash: 0adf92fe06be97bb0b6c2a2a22c1f707
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player_Controller
@@ -651,7 +684,7 @@ ScriptsOnlyBuild:
     className: TextButtonTransition
   - hash:
       serializedVersion: 2
-      Hash: b3f99652130f1aa5d8fc828f731736d3
+      Hash: b086b10adb8deb91969303e21f15ed60
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Gun
@@ -735,7 +768,7 @@ ScriptsOnlyBuild:
     className: PunTurnManager
   - hash:
       serializedVersion: 2
-      Hash: 8595ae9e449cd1771fedc8ca3859e257
+      Hash: 8c6c1bcab72b1d92ab38e1bcb08fd453
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GunManager
@@ -825,7 +858,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 5476e1192ba89774c02bce4546e0e0a0
+      Hash: bae847c1a8b1995224511f606ffcaec8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ZombieManager
@@ -841,6 +874,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: OnEscapeQuit
+  - hash:
+      serializedVersion: 2
+      Hash: 234b339f5650da687e888e22de337f36
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EquipGunButton
   - hash:
       serializedVersion: 2
       Hash: df434544c9f7b33d1cc7e635b180d279
@@ -949,9 +988,15 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 57b8adfa04a82e6b118dedd6e76242f9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Door
   platform: 5
   scenePathNames:
   - Assets/Scenes/LobbyMenu.unity
   - Assets/Scenes/GameLevel.unity
-  playerPath: C:/Users/jaket/Desktop/AdvancedSpecialisedProject/TerminalVelocity -
-    Build/Terminal Velocity.exe
+  playerPath: C:/Users/jaket/OneDrive/Desktop/AdvancedSpecialisedProject/Terminal
+    Velocity (0.1.7) - Build/Terminal Velocity.exe

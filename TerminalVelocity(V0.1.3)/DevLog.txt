@@ -1,3 +1,5 @@
+
+
 13/1/2020 - Work (16:00 - 00:30)
 
 14/1/2020 
@@ -140,3 +142,91 @@ which calculates which player is closest to the zombie and chooses that one to c
 12/3/2020 
 Synced zombies positions across the network, added zombie model to zombie model prefab. 
 
+13/3/2020
+Added spawner functionality to the zombie manager which holds a list of the transforms of active spawn points,
+and spawns zombies there until the round is over. Manages round number and increases difficulty over time.
+Created airport lobby section of the map with downloaded assets (feeling like a remodel will be necessary to
+increase the quality of the visual style). 
+
+14/3/2020 - Work (12:00 - 21:00)
+Created floor and wall tile assets. 
+Remade lobby section of the map using tiles, glass panel material and stair object downloaded from Kenney
+Game Assets. 
+
+15/3/2020 - Work (16:00 - 23:30)
+
+16/3/2020 Work - (10:00 - 17:00) 
+Created particle effect animations for muzzle flashes on weapons. Encountered issue with the number of
+particles being emitted. After going through the process of trial and error I discovered that I had 
+misunderstood the workings of the burst system and a lot of my particles were moving so fast they could 
+not be seen. Also encountered an issue when trying to add a light effect, as referencing it in a script,
+and enabling it then disabling when the particle effect is finished did not seem to work as the animation
+was so short the light does not have time to render. I solved this by using the built-in lighting setting 
+on the particle effect, which automatically lights up a certain percentage of the particles.  
+
+17/3/2020
+Created gun models in magica voxel and optimised them for unity in Blender: MP5, AUG, P99.
+Made progress on UI code, buying guns adds them to inventory. Did this by creating a custom struct which 
+holds the 2 objects that contain all of the gun information: gun controller and gun components. 
+Then created 2 lists, one to contain all of the guns, and then when to contain the guns that have
+been purchased. Added functions to the UI buttons which add to and remove from the lists. Added 
+functionality to WeaponManager script which takes a reference to the struct of the currently equipped gun
+and updates the graphics, UI and weapon characteristics. 
+
+18/3/2020
+Made progress on UI code, clicking on guns in inventory, equips them in game and removes the listing
+from the inventory until another gun replaces it. Issues with list returning empty, fixed upon 
+discovering that I had a duplicate of the script on another game object it shouldn't have been on. 
+Created gun model for M4A1 and scope object which contains a camera that renders to the 3d object.
+
+19/2/2020
+Finished UI code, equipping a gun displays its name and image next to the list of guns in the inventory.
+Created new wall asset (red stripe), and created right corridor, staircase and staff room sections of 
+the map. 
+
+20/3/2020
+Added health bar graphic to UI with bar which shrinks in size when the player takes damage. Added function
+to zombie so that on collision with player, they take damage. Added a delay of a couple seconds between
+the player getting hit and being able to take damage again.
+Created graphics to display round number and the amount of money the player has and linked them to the 
+player_stats script.
+
+21/3/2020 - Work (12:00 - 21:00)
+
+
+22/3/2020 - Work (12:00 - 21:00)
+
+
+23/3/2020
+Created door asset and optimised for unity. Created function for player which casts a ray out in front,
+and if it hits a door it will display a prompt to press 'E' and a cost. While the cost is on screen, if 
+they have the required funds, pressing E will subtract the cost from the players total money, and open
+the door, syncing the animation across all clients, and updating the zombies' navmesh path. 
+
+24/3/2020
+Identified issue with zombies not being able to leave their spawn areas. Solved by adding the the wall
+that the zombies can pass through but the player cannot, into a new layer, and setting the navmesh to
+ignore that layer when baking. This sets up the zombies path correctly and allows them to spawn.
+
+25/3/2020
+
+26/3/2020
+
+27/3/2020
+
+28/3/2020
+Identified issue with FMP proposal which could result in having to think of a new idea due to being unable
+to safely test my previous idea because of Covid-19.
+
+29/3/2020
+Working on new FMP idea. 
+
+30/3/2020
+working on new FMP idea. 
+
+31/3/2020
+Implemented Unity high-definition rendering pipeline and post processing effects such as anti-aliasing and 
+improved shadows & light maps. Issue with all materials displaying as bright pink. After troubleshooting
+discovered that lighting mode must be set to Linear as Gamma is not supported at the time of writing. 
+
+1/4/2020

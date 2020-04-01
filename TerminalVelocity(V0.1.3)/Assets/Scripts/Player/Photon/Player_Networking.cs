@@ -2,6 +2,7 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Player_Networking : MonoBehaviour
@@ -10,10 +11,15 @@ public class Player_Networking : MonoBehaviour
 
     private PhotonView PV;
 
+    //Scripts. 
     private Player_Controller playerController; 
     private Player_Input_Handler inputHandler;
-    private GunManager gunManager; 
-
+    private GunManager gunManager;
+    private Player_Stats playerStats;
+    private Player_Networking networking;
+    private InventoryUI uiScript;
+   
+    //GameObjects. 
     private GameObject playerCamera;
     private GameObject UI;
     private GameObject playerBody;
@@ -23,14 +29,13 @@ public class Player_Networking : MonoBehaviour
         PV = GetComponent<PhotonView>();
         playerController = GetComponent<Player_Controller>();
         inputHandler = GetComponent<Player_Input_Handler>();
-        gunManager = GetComponent<GunManager>(); 
+        gunManager = GetComponent<GunManager>();
+        playerStats = GetComponent<Player_Stats>();
+        networking = GetComponent<Player_Networking>();
+        uiScript = GetComponent<InventoryUI>();
 
         SpawnAvatar();
-
-        playerController.SetupForMovement();
-
-        gunManager.SetupForShooting(); 
-
+       
         UI = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/UI").gameObject;
 
         playerBody = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/Body").gameObject;
@@ -40,7 +45,11 @@ public class Player_Networking : MonoBehaviour
         if (!PV.IsMine)
         {
             playerController.enabled = false;
-            inputHandler.enabled = false;           
+            inputHandler.enabled = false;
+            //gunManager.enabled = false;
+            playerStats.enabled = false;
+            networking.enabled = false;
+            uiScript.enabled = false; 
         }
         if(PV.IsMine)
         {
@@ -48,7 +57,14 @@ public class Player_Networking : MonoBehaviour
             UI.gameObject.SetActive(true);
             playerBody.SetActive(false);
         }
-   
+
+        playerController.SetupForMovement();
+
+        gunManager.SetupForShooting();
+
+        uiScript.SetupForShooting();
+
+        playerStats.Setup(); 
     }
 
     private void SpawnAvatar()
@@ -65,5 +81,4 @@ public class Player_Networking : MonoBehaviour
         Debug.Log("[INFO] Instantiating avatar.");
         Instantiate(playerAvatarPrefab, pos, Quaternion.identity, transform);
     }
-
 }

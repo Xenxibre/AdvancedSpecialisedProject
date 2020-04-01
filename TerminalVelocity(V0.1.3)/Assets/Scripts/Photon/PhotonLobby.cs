@@ -33,6 +33,19 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, ILobbyCallbacks
     //Connect to master photon server.
     void Start()
     {
+        if (PhotonLobby.lobby == null)
+        {
+            PhotonLobby.lobby = this;
+        }
+        else
+        {
+            if (PhotonLobby.lobby != this)
+            {
+                Destroy(PhotonLobby.lobby.gameObject);
+                PhotonLobby.lobby= this;
+            }
+        }
+
         PhotonNetwork.ConnectUsingSettings();
         roomListings = new List<RoomInfo>(); 
     }

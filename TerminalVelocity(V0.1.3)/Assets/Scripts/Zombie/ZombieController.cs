@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI; 
+using UnityEngine.AI;
+using Photon.Pun; 
 
 public class ZombieController : MonoBehaviour
 {
     //Parent Object. 
     private ZombieManager zombManager;
 
+    //Last player that hit zombie.
+    private Player_Stats lastPlayer; 
+
     //Own agent. 
     private NavMeshAgent agent;
 
     //Zombie Info. 
-    private float health; 
+    private float health;
+    private float damage;
 
     //Positions of players that are alive. 
     private List<Transform> playerList;
@@ -20,20 +25,27 @@ public class ZombieController : MonoBehaviour
     //Position of the closest player. 
     private Vector3 closestPlayer;
 
-   
+    //Photon view. 
+    private PhotonView PV; 
 
     private void Start()
-    {        
+    {
+        PV = GetComponent<PhotonView>(); 
         zombManager = GameObject.Find("ZombieManager").GetComponent<ZombieManager>();
         agent = GetComponent<NavMeshAgent>();
-        playerList = zombManager.GetPlayerPosList();
 
-        health = 100; 
+        damage = 25;
+
+        Physics.IgnoreLayerCollision(9, 10); 
     }
 
     private void Update()
     {
-        if(playerList.Count != 0)
+        //Debug.Log("My health is " + health); 
+
+        playerList = zombManager.GetPlayerPosList();
+
+        if (playerList.Count != 0)
         {
             UpdateClosestPlayer();
         }        
@@ -42,7 +54,8 @@ public class ZombieController : MonoBehaviour
 
         if(health <= 0)
         {
-            Destroy(this.gameObject); 
+            zombManager.ZombieDied(this);
+            lastPlayer.Money += 100; 
         }
     }
 
@@ -83,6 +96,30 @@ public class ZombieController : MonoBehaviour
         agent.SetDestination(closestPlayer); 
     }
 
+    //-------------------------------------------------
+    //Collision. 
+    //-------------------------------------------------
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "PlayerAlive")
+        {
+            collision.gameObject.GetComponent<Player_Stats>().TakeDamage(damage); 
+        }
+    }
+    
+
+    //-------------------------------------------------
     //Getters & Setters.
+    //-------------------------------------------------
     public float Health { get => health; set => health = value; }
+
+    public Player_Stats LastPlayer { get => lastPlayer; set => lastPlayer = value; }
+
+    public void SetSpeed(float speed)
+    {
+        if (agent != null)
+        {
+            agent.speed = speed; 
+        }
+    }
 }

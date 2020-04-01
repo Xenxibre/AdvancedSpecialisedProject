@@ -35,5 +35,9 @@ MonoBehaviour:
   - RPC_CreatePlayer
   - RPC_LoadedGameScene
   - RPC_AddCharacter
+  - RPC_SpawnZombie
+  - RPC_ZombieDied
+  - RPC_DestroyZombie
+  - RPC_OpenDoor
   DisableAutoOpenWizard: 1
   ShowSettings: 1

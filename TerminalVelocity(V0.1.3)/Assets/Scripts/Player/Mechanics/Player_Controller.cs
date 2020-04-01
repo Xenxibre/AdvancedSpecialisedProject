@@ -4,145 +4,116 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
-{ 
-    
-    enum Guns
-    {
-        Deagle,
-        AK47
-    }
+{
+    //Input. 
+    private Player_Input_Handler inputHandler;
+    private CharacterController characterController;
 
-    //Input Manager. 
-    [SerializeField] private Player_Input_Handler m_inputHandler;
+    //Rotation. 
+    private GameObject rotationHelper;
 
-    private GameObject m_rotationHelper;
-    private CharacterController m_characterController;
+    //Jumping.
+    [SerializeField] private float jumpForce;
+
+    private float gravity = -16.0f; 
+    private float groundDistance = 0.4f;
+
+    private Transform groundCheck;
+
+    public LayerMask groundMask;
+
+    private bool isGrounded; 
 
     //Movement variables.
-    private float m_moveSpeed;
+    private float moveSpeed;
+    private Vector3 velocity;
 
-    [SerializeField] private float m_walkSpeed = 4f;
-    [SerializeField] private float m_sprintSpeed = 10f;
-    [SerializeField] private float m_acceleration = 4f;
+    [SerializeField] private float walkSpeed = 4f;
+    [SerializeField] private float sprintSpeed = 10f;
+    [SerializeField] private float acceleration = 4f;
 
-    private bool m_isJumping;
+    private float yMouseInput;
+    private float xMouseInput; 
 
-    [SerializeField] private float m_jumpMultiplier;
-    [SerializeField] private AnimationCurve m_jumpFalloff;
-
-    private Vector3 characterVelocity; 
-
-    //Gun Variables.
-    [SerializeField] List<GameObject> m_gunList;
-    [SerializeField] List<GameObject> m_equippedGunList;
-
-    private bool m_primaryChanged;
-    private bool m_secondaryChanged;
-
-    private int m_currentlyEquipped;
-
-    // Start is called before the first frame update
     void Start()
     {
-        m_characterController = GetComponent<CharacterController>(); 
-
-        m_primaryChanged = false;
-        m_secondaryChanged = false;
-
-        m_currentlyEquipped = 1; //Equip secondary pistol by default.
+        characterController = GetComponent<CharacterController>();
+        inputHandler = GetComponent<Player_Input_Handler>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         HandleCharacterMovement(); 
     }
 
+    //-------------------------------------------------------
+    //Movement Handling.
+    //-------------------------------------------------------
     void HandleCharacterMovement()
-    {
-        //Rotate character with horizontal mouse movement. 
-        transform.Rotate(new Vector3(0f, (m_inputHandler.GetHorizontalLookInput()), 0f), Space.Self);
+    {   
+        xMouseInput += inputHandler.GetHorizontalLookInput();
+        transform.localRotation = Quaternion.Euler(0f, xMouseInput, 0f); //Rotate character with horizontal mouse movement. 
 
-        //Rotate camera with vertical mouse movement. 
-        if (m_rotationHelper != null)
+        if (rotationHelper != null) //Rotate camera with vertical mouse movement. 
         {
-            m_rotationHelper.transform.Rotate(new Vector3((-m_inputHandler.GetVerticalLookInput()), 0f, 0f), Space.Self);
+            yMouseInput += -inputHandler.GetVerticalLookInput();
+            yMouseInput = Mathf.Clamp(yMouseInput, -90f, 90f);
+            rotationHelper.transform.localRotation = Quaternion.Euler(yMouseInput, 0f, 0f);
         }
-
-        //Check if player is sprinting. 
-        bool isSprinting = m_inputHandler.GetSprintInput();
-
-        //Create world space vector.
-        Vector3 worldSpaceMovement = transform.TransformVector(m_inputHandler.GetMoveInput());
-
-        //Move player.
-        if(m_characterController != null)
+        
+        Vector3 worldSpaceMovement = transform.TransformVector(inputHandler.GetMoveInput()); //Create world space vector.
+      
+        if (characterController != null)  //Move player.
         {
-            m_characterController.SimpleMove(worldSpaceMovement * m_walkSpeed);
-            transform.position = m_characterController.transform.position; 
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+            Debug.Log(isGrounded); 
+
+            if (isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2f; 
+            }
+
+            characterController.Move(worldSpaceMovement * moveSpeed * Time.deltaTime); //Move player according to Input. 
+
+            JumpInput(); //Test for jump input. 
+
+            velocity.y += gravity * Time.deltaTime; //Apply gravity. 
+
+            characterController.Move(velocity * Time.deltaTime);
+
+            transform.position = characterController.transform.position; 
         }
 
         SetMovementSpeed();
-        JumpInput(); 
     }
 
-    //Check if sprinting and adjust movement speed.
-    void SetMovementSpeed()
+    void SetMovementSpeed() //Check if sprinting and adjust movement speed.
     {
-        if (m_inputHandler.GetSprintInput())
+        if (inputHandler.GetSprintInput())
         {
-            m_moveSpeed = Mathf.Lerp(m_moveSpeed, m_sprintSpeed, Time.deltaTime * m_acceleration);
+            moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, Time.deltaTime * acceleration);
         }
         else
         {
-            m_moveSpeed = Mathf.Lerp(m_moveSpeed, m_walkSpeed, Time.deltaTime * m_acceleration);
+            moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, Time.deltaTime * acceleration);
         }
     }
 
-    void JumpInput()
+    void JumpInput() //Check if jumping. 
     {
-        if (m_inputHandler.GetJumpInputHeld() && !m_isJumping)
+        if (inputHandler.GetJumpInputDown() && isGrounded)
         {
-            m_isJumping = true;
-            StartCoroutine(JumpEvent());
+            velocity.y = jumpForce; 
         }
     }
 
-    private bool IsOnSlope()
-    {
-        if (m_isJumping)
-        {
-            return false;
-        }
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, m_characterController.height / 2 * 1.3f))
-        {
-            if (hit.normal != Vector3.up)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private IEnumerator JumpEvent()
-    {
-        float timeInAir = 0;
-
-        do
-        {
-            float jumpForce = m_jumpFalloff.Evaluate(timeInAir);
-            m_characterController.Move(Vector3.up * jumpForce * m_jumpMultiplier * Time.deltaTime);
-            timeInAir += Time.deltaTime;
-            yield return null;
-        } while (m_characterController.isGrounded && m_characterController.collisionFlags != CollisionFlags.Above);
-        m_isJumping = false; 
-    }
-
+    //-----------------------------------------------------
+    //Public Functions.
+    //-----------------------------------------------------
     public void SetupForMovement()
     {
-        m_rotationHelper = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/RotationHelper").gameObject;
+        rotationHelper = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/RotationHelper").gameObject;
+        groundCheck = transform.Find("/PhotonPlayer(Clone)/PhotonPlayerAvatar(Clone)/GFX/GroundCheck").gameObject.transform;
     }
 }
